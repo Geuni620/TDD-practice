@@ -36,8 +36,8 @@ test("initial conditions", () => {
 test("checkbox가 체크되었을 때, button이 비 활성화 된다.", () => {
   render(<App />);
 
+  const checkbox = screen.getByRole("checkbox", {name: "Disable button"});
   const colorButton = screen.getByRole("button", {name: "Change to blue"});
-  const checkbox = screen.getByRole("checkbox");
 
   fireEvent.click(checkbox);
   expect(colorButton).toBeDisabled();
