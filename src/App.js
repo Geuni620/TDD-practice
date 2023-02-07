@@ -1,6 +1,12 @@
 import "./App.css";
 import {useState} from "react";
 
+export function replaceCamelWithSpaces(colorName) {
+  return colorName.replace(/\B([A-Z])\B/g, " $1");
+  // 단어 가운데에서 대문자를 찾았을 때마다 개수에 상관없이 매번 다음을 수행하라는 의미
+  // → 어떤 대문자를 발견하든 앞에 공백을 추가한 대문자로 대체
+}
+
 function App() {
   const [buttonColor, setButtonColor] = useState("red");
   const newButtonColor = buttonColor === "red" ? "blue" : "red";
