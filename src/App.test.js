@@ -45,3 +45,42 @@ test("checkbox가 체크되었을 때, button이 비 활성화 된다.", () => {
   fireEvent.click(checkbox);
   expect(colorButton).toBeEnabled();
 });
+
+test("checkbox에 체크 되었을 때, button이 disabled 되어야하고, 색상은 회색으로 변경해야한다.", () => {
+  render(<App />);
+
+  const checkbox = screen.getByRole("checkbox", {name: "Disable button"});
+  const colorButton = screen.getByRole("button", {name: "Change to blue"});
+
+  // disable button
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeDisabled();
+  expect(colorButton).toHaveStyle({backgroundColor: "gray"});
+
+  // re-enable button
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({backgroundColor: "red"});
+});
+
+test("버튼을 클릭하면 색상이 변경되고, 체크박스를 클릭한 후 버튼은 그레이가 되어야한다.", () => {
+  render(<App />);
+
+  const checkbox = screen.getByRole("checkbox", {name: "Disable button"});
+  const colorButton = screen.getByRole("button", {name: "Change to blue"});
+
+  // change button to blue
+  fireEvent.click(colorButton);
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({backgroundColor: "blue"});
+
+  // disable button
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeDisabled();
+  expect(colorButton).toHaveStyle({backgroundColor: "gray"});
+
+  // re-enable button
+  fireEvent.click(checkbox);
+  expect(colorButton).toBeEnabled();
+  expect(colorButton).toHaveStyle({backgroundColor: "blue"});
+});
