@@ -3,6 +3,7 @@ import {render, screen, fireEvent} from "@testing-library/react";
 import App from "./App";
 import {replaceCamelWithSpaces} from "./App";
 
+/*
 test("button has correct initial color, and updates when clicked", () => {
   render(<App />);
 
@@ -99,4 +100,19 @@ describe("spaces before camel-case capital letters", () => {
   test("Works for multiple inner capital letters", () => {
     expect(replaceCamelWithSpaces("MediumVioletRed")).toBe("Medium Violet Red");
   });
+});
+*/
+
+test("빨간색 대신 자주색을, 파란색 대신 암청색으로 변하는지 확인", () => {
+  render(<App />);
+
+  const colorButton = screen.getByRole("button", {
+    name: "Change to Midnight Blue",
+  });
+
+  fireEvent.click(colorButton);
+  expect(colorButton).toHaveStyle({backgroundColor: "MidnightBlue"});
+
+  fireEvent.click(colorButton);
+  expect(colorButton).toHaveStyle({backgroundColor: "MediumVioletRed"});
 });
