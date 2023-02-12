@@ -48,7 +48,7 @@ test("popover responds to hover", async () => {
   expect(popover).toBeInTheDocument();
 
   // popover disappears when we mouse out
-  await user.hover(termsAndConditions);
+  await user.unhover(termsAndConditions);
   expect(popover).not.toBeInTheDocument();
 });
 
