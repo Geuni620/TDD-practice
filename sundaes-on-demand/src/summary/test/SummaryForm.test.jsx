@@ -33,12 +33,23 @@ test("체크박스를 체크했을 때 체크가 되고, 버튼은 활성화된�
 
 test("popover responds to hover", async () => {
   const user = userEvent.setup();
+  render(<SummaryForm />);
 
   // popover starts out hidden
+  const nullPopover = screen.queryByText(
+    /no ice cream will actually be delivered/i
+  );
+  expect(nullPopover).not.toBeInTheDocument();
 
   // popover appears on mouseover of checkbox label
+  const termsAndConditions = screen.getByText(/terms and conditions/i);
+  await user.hover(termsAndConditions);
+  const popover = screen.getByText(/no ice cream will actually be delivered/i);
+  expect(popover).toBeInTheDocument();
 
   // popover disappears when we mouse out
+  await user.hover(termsAndConditions);
+  expect(popover).not.toBeInTheDocument();
 });
 
 /*
@@ -83,5 +94,13 @@ test("popover responds to hover", async () => {
         - 만약 이러한 속성들이 표시되는 방식이 일관적이지 못하다면, 사용자들이 소프트웨어와 상호작용하는 것과 동일한 방식으로 테스트가 진행되고 있는지를 알 수 없을 것.
       3. 테스트 IDs
         - 최후의 수단, 사용자들이 테스트 ID와 상호작용할 일은 저대 없기 때문.
+
+*/
+
+/*
+  44. 
+  - 비동기 테스트에서 문제가 되는 것은 단언과 달라도 성공하는 경우가 있음
+    - 단언이 작동하기 전 테스트가 종료되기 때문.
+
 
 */
