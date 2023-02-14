@@ -9,7 +9,7 @@ export default function Options({optionType}) {
   useEffect(() => {
     // optionType is 'scoops' or 'toppings'
     axios
-      .get(`localhost:3030/${optionType}`)
+      .get(`http://localhost:3030/${optionType}`)
       .then((res) => setItems(res.data))
       .catch((err) => {
         // TODO: handle error response

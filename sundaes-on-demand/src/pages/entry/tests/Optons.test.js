@@ -2,11 +2,11 @@ import {render, screen} from "@testing-library/react";
 
 import Options from "../Options";
 
-test("displays image for each scoop option from server", () => {
+test("displays image for each scoop option from server", async () => {
   render(<Options optionType="scoops" />);
 
   //find images
-  const scoopImages = screen.getAllByRole("img", {name: /scoop$/i}); // 여기서 달러 기호는 문자열이 "scoop"으로 끝난다는 걸 나타냄
+  const scoopImages = await screen.findAllByRole("img", {name: /scoop$/i}); // 여기서 달러 기호는 문자열이 "scoop"으로 끝난다는 걸 나타냄
   expect(scoopImages).toHaveLength(2);
 
   // confirm alt text of images

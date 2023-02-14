@@ -1,4 +1,4 @@
-import Col from "react-bootstrap";
+import Col from "react-bootstrap/Col";
 
 export default function ScoopOption({name, imagePath}) {
   return (
