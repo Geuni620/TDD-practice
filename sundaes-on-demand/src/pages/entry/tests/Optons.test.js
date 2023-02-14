@@ -29,3 +29,17 @@ test("displays image for each scoop option from server", async () => {
   - 하지만 Mock Service Worker 설정 때문에 요청은 서버에 전해지지 않고 대신 Mock Service Worker가 요청을 가로채서
   - 옵션 컴포넌트에 핸들러 응답을 반환하게 됨
   */
+
+test("diplays image for each toppings option from server", async () => {
+  render(<Options optionType="toppings" />);
+
+  const toppingImages = await screen.findAllByRole("img", {name: /toppings$/i});
+  expect(toppingImages).toHaveLength(3);
+
+  const altText = toppingImages.map((element) => element.alt);
+  expect(altText).toEqual([
+    "Cherries toppings",
+    "M&Ms toppings",
+    "Hot fudge toppings",
+  ]);
+});
