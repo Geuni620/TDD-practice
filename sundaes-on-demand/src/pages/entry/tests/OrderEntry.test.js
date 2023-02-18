@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import OrderEntry from "../OrderEntry";
 import {rest} from "msw";
 import {server} from "../../../mocks/server";
@@ -15,9 +15,16 @@ test("handles error for scoops and toppings routes", async () => {
 
   render(<OrderEntry />);
 
-  const alerts = await screen.findAllByRole("alert", {
-    name: "An unexpected error ocurred. Please try again later.",
+  await waitFor(async () => {
+    const alerts = await screen.findAllByRole("alert");
+    expect(alerts).toHaveLength(2);
   });
-
-  expect(alerts).toHaveLength(2);
 });
+
+/*
+    59. 선택된 테스트만 실행하는 방법과 waitFor
+    test.skip와 test.only로 디버깅을 할 수 있음.
+
+    - waitFor
+      - 항목이 두 개가 될 때까지 기다리도록 하는 메서드로, 두 개의 alert가 모두 반환되거나 타임아웃 제한에 도달할 때까지 테스트 실행을 멈춤.
+*/
