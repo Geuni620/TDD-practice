@@ -28,8 +28,6 @@ export default function Options({optionType}) {
   // TODO: replace "null" with ToppingOption when available
   const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
 
-  console.log(optionType.slice(1));
-
   const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
   const optionItems = items.map((item) => (
