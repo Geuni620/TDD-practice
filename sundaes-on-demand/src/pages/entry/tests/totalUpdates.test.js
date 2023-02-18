@@ -1,5 +1,6 @@
-import {render, screen} from "@testing-library/react";
+import {render, screen} from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
+
 import Options from "../Options";
 
 test("update scoop subtotal when scoops change", async () => {
@@ -20,7 +21,7 @@ test("update scoop subtotal when scoops change", async () => {
 
   await user.clear(vanillaInput);
   await user.type(vanillaInput, "1");
-  expect(scoopsSubtotal).toHaveTextContent("2.00 ");
+  expect(scoopsSubtotal).toHaveTextContent("2.00");
 
   // 초콜릿 스쿱을 2개 올리고, subTotal을 확인한다.
   const chocolateInput = await screen.findByRole("spinbutton", {
